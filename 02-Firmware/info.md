@@ -1,0 +1,1 @@
+(معماری نرم‌افزار، GPIO map، منطق Auto/Manual)
