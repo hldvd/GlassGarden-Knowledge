@@ -1,0 +1,1 @@
+--- type: hardware component: relay-module model: JQC-3F-5VDC-C gpio: [27, 26, 32, 33] status: final date: 2026-09-18 tags: [hardware, relay, power] ---
