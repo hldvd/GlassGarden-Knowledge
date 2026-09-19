@@ -1,5 +1,6 @@
 [
   "cli-rest-mcp",
   "obsidian-git",
-  "metadata-menu"
+  "metadata-menu",
+  "templater-obsidian"
 ]
