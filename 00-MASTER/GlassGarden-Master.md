@@ -13,14 +13,14 @@
 
 - میکروکنترلر: ESP32 (esp32dev)
 - سنسور دما و رطوبت: DHT22 → [[DHT22-Sensor]]
-- سنسور سطح آب: فلوتر سوئیچ دیجیتال → [[Water-Level-Sensor]]
+- سنسور سطح آب: P100 آنالوگ → [[Water-Level-Sensor]]
 - نقشه پین‌ها → [[GPIO-Map]]:
     - نور LED → GPIO27
     - پمپ آب → GPIO26
     - میستر (فوگر) → GPIO32
     - فن → GPIO33
     - DHT22 → GPIO17 (با pull-up ده کیلواهم)
-    - فلوتر سوئیچ → GPIO4 (INPUT_PULLUP)
+    - P100 (سطح آب) → GPIO4 (ADC1)
 - ماژول رله: JQC-3F-5VDC-C، ۵ ولت، Active-LOW → [[Relay-Outputs]]
 - تغذیه: آداپتور 12V/5A → مبدل Buck LM2596 → 5V → [[Power-System]]
 - درایور LED: مدار جریان ثابت با LM317T (۸۳۳ میلی‌آمپر) → [[LED-Driver]]

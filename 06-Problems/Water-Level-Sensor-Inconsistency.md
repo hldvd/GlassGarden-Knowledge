@@ -3,10 +3,10 @@ type: problem
 status: open
 date: 2026-09-24
 related: [[Config-and-Datastreams]], [[Water-Level-Sensor]], [[SensorManager]]
-tags: [problem, inconsistency, water-level, sensor]
+tags: [problem, bug, water-level, sensor, p100]
 ---
 
-# ناسازگاری سنسور سطح آب — Config در برابر کد
+# ناسازگاری سنسور سطح آب — کد در برابر سخت‌افزار واقعی
 
 **وضعیت:** باز
 **تاریخ:** 2026-09-24
@@ -14,7 +14,7 @@ tags: [problem, inconsistency, water-level, sensor]
 
 ## شرح مشکل
 
-در `Config.h` ثابت‌های مربوط به سنسور سطح آب آنالوگ (P100) تعریف شده‌اند:
+سخت‌افزار واقعی پروژه از سنسور **آنالوگ P100** برای اندازه‌گیری سطح آب استفاده می‌کند. ثابت‌های مربوطه در `Config.h` به‌درستی تعریف شده‌اند:
 
 ```cpp
 constexpr uint16_t WATER_LEVEL_EMPTY = 500;
@@ -32,17 +32,23 @@ state.waterLevelPercent = waterPresent ? 100 : 0;
 
 این یعنی:
 - ثابت‌های `WATER_LEVEL_EMPTY`، `WATER_LEVEL_FULL` و `WATER_LEVEL_EMPTY_HYSTERESIS` **استفاده نمی‌شوند**.
-- کامنت `Config.h` هنوز به «سنسور سطح آب P100» اشاره دارد.
-- منطق هیسترزیس در `SensorManager` به‌صورت دیجیتال پیاده شده (تغییر وضعیت با لاگ سریال).
-- منطق سطح آب در کد: `HIGH` = آب موجود، `LOW` = آب خالی.
+- خواندن دیجیتال (`digitalRead`) به‌جای آنالوگ (`analogRead`) انجام می‌شود.
+- `waterLevelPercent` فقط ۰ یا ۱۰۰ است، به‌جای درصد واقعی.
+- منطق هیسترزیس آنالوگ تعریف شده اما استفاده نمی‌شود.
 
-## سوالات نیازمند تأیید
+## اقدام لازم
 
-۱. آیا سنسور از P100 آنالوگ به فلوتر سوئیچ دیجیتال تغییر کرده؟ اگر بله، ثابت‌های Config باید پاک‌سازی شوند.
-۲. آیا هنوز پلن استفاده از سنسور آنالوگ P100 در آینده وجود دارد؟ اگر بله، ثابت‌ها باید با کامنت «رزرو برای آینده» مشخص شوند.
+کد `SensorManager.cpp` باید به‌روزرسانی شود تا از `analogRead(WATER_PIN)` با ثابت‌های P100 استفاده کند:
 
-## اقدام پیشنهادی
+۱. `pinMode(WATER_PIN, INPUT)` به‌جای `INPUT_PULLUP`
+۲. خواندن مقدار خام ADC: `int raw = analogRead(WATER_PIN);`
+۳. محاسبه درصد: `map(raw, WATER_LEVEL_EMPTY, WATER_LEVEL_FULL, 0, 100)`
+۴. اعمال هیسترزیس برای خروج از حالت «خالی» با `WATER_LEVEL_EMPTY_HYSTERESIS`
+۵. پین `WATER_PIN` (GPIO4) باید برای ورودی آنالوگ (ADC1) مناسب باشد
 
-- پاک‌سازی یا کامنت‌گذاری ثابت‌های مرتبط با ADC در `Config.h`
-- به‌روزرسانی کامنت `WATER_PIN` از «سنسور سطح آب P100» به «فلوتر سوئیچ دیجیتال»
-- به‌روزرسانی [[GlassGarden-Master]] پس از تصمیم‌گیری
+## مرتبط
+
+- [[Config-and-Datastreams]] — ثابت‌های P100
+- [[Water-Level-Sensor]] — باید به P100 آنالوگ به‌روزرسانی شود
+- [[SensorManager]] — کد نیازمند اصلاح
+- [[GlassGarden-Master]] — پس از رفع مشکل به‌روزرسانی شود

@@ -1,31 +1,39 @@
 ---
 type: hardware
 component: sensor
-model: float-switch
+model: P100
 gpio: 4
 status: final
 date: 2026-09-24
-tags: [hardware, sensor, water-level, float-switch]
+tags: [hardware, sensor, water-level, p100, analog]
 ---
 
-# سنسور سطح آب — فلوتر سوئیچ
+# سنسور سطح آب — P100 آنالوگ
 
 ## مشخصات
 
-- نوع: فلوتر سوئیچ (دو سیمه)
-- پین: GPIO4
-- منطق: دیجیتال با `INPUT_PULLUP` داخلی
+- نوع: سنسور آنالوگ سطح آب P100
+- پین: GPIO4 (ADC1)
+- منطق: خواندن مقدار خام ADC با `analogRead`
 
-## نحوه کار
+## ثابت‌های کالیبراسیون
 
-| وضعیت | کلید | پین | `waterLevelPercent` |
-|---|---|---|---|
-| آب موجود | بسته | `HIGH` | ۱۰۰ |
-| آب خالی | باز | `LOW` | ۰ |
+| ثابت | مقدار | توضیح |
+|---|---|---|
+| `WATER_LEVEL_EMPTY` | ۵۰۰ | مقدار خام ADC هنگام خالی بودن مخزن |
+| `WATER_LEVEL_FULL` | ۳۵۰۰ | مقدار خام ADC هنگام پر بودن مخزن |
+| `WATER_LEVEL_EMPTY_HYSTERESIS` | ۱۵۰ | حاشیه هیسترزیس برای خروج از حالت «خالی» (جلوگیری از نوسان) |
 
-> منطق کد `SensorManager.cpp`: `digitalRead(WATER_PIN) == HIGH` یعنی آب موجود.
+## نحوه کار مورد انتظار
 
-کلاس `SensorManager` در هر چرخه خواندن، وضعیت فلوتر سوئیچ را می‌خواند. تغییر از «موجود» به «خالی» باعث فعال شدن هشدار `waterEmpty = true` می‌شود.
+مقدار خام ADC خوانده می‌شود و با `map` به درصد تبدیل می‌شود:
+
+```cpp
+int raw = analogRead(WATER_PIN);
+int percent = map(raw, WATER_LEVEL_EMPTY, WATER_LEVEL_FULL, 0, 100);
+```
+
+هیسترزیس برای جلوگیری از نوسان سریع هشدار «آب خالی» وقتی مقدار خام نزدیک مرز است.
 
 ## محافظت در برابر آب خالی
 
@@ -35,9 +43,12 @@ tags: [hardware, sensor, water-level, float-switch]
 
 این محافظت در هر دو حالت AUTO و MANUAL فعال است.
 
+> ⚠️ **توجه:** کد فعلی `SensorManager.cpp` به‌جای `analogRead` از `digitalRead` (فلوتر سوئیچ) استفاده می‌کند که با سخت‌افزار واقعی P100 مطابقت ندارد. → [[Water-Level-Sensor-Inconsistency]]
+
 ## مرتبط
 
 - [[GPIO-Map]]
 - [[SensorManager]]
 - [[DeviceManager]]
-- [[Water-Level-Sensor-Inconsistency|⚠️ ناسازگاری با Config]]
+- [[Config-and-Datastreams]]
+- [[Water-Level-Sensor-Inconsistency]]

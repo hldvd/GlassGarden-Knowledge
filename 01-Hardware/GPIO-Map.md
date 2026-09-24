@@ -27,11 +27,10 @@ tags: [hardware, gpio, esp32]
 | قطعه | پین GPIO | توضیح |
 |---|---|---|
 | DHT22 | GPIO17 | سنسور دما و رطوبت (با pull-up ده کیلواهم) |
-| سنسور سطح آب | GPIO4 | فلوتر سوئیچ (دو سیمه) |
+| سنسور سطح آب | GPIO4 | سنسور آنالوگ P100 (ADC1) |
 
-> پین سطح آب با `INPUT_PULLUP` داخلی راه‌اندازی شده است.
-> ⚠️ منطق سطح آب در کد: `HIGH` = آب موجود، `LOW` = آب خالی.
-> به کد `SensorManager.cpp` مراجعه کنید: `digitalRead(WATER_PIN) == HIGH` یعنی آب موجود.
+> پین سطح آب: سنسور آنالوگ P100 — باید با `analogRead` خوانده شود.
+> ⚠️ کد فعلی `SensorManager.cpp` از `digitalRead` با `INPUT_PULLUP` استفاده می‌کند که با سخت‌افزار واقعی مطابقت ندارد. → [[Water-Level-Sensor-Inconsistency]]
 
 ## مرتبط
 
