@@ -12,38 +12,76 @@
 ## ۲) سخت‌افزار
 
 - میکروکنترلر: ESP32 (esp32dev)
-- سنسور: DHT22 — دما و رطوبت
-- نقشه پین‌ها:
+- سنسور دما و رطوبت: DHT22 → [[DHT22-Sensor]]
+- سنسور سطح آب: فلوتر سوئیچ دیجیتال → [[Water-Level-Sensor]]
+- نقشه پین‌ها → [[GPIO-Map]]:
     - نور LED → GPIO27
     - پمپ آب → GPIO26
     - میستر (فوگر) → GPIO32
     - فن → GPIO33
     - DHT22 → GPIO17 (با pull-up ده کیلواهم)
-- تغذیه: آداپتور 12V/5A → مبدل Buck LM2596 → 5V
-- رله‌ها: ۵ ولت، Active-LOW
-- درایور LED: مدار جریان ثابت با LM317T (۸۳۳ میلی‌آمپر)
+    - فلوتر سوئیچ → GPIO4 (INPUT_PULLUP)
+- ماژول رله: JQC-3F-5VDC-C، ۵ ولت، Active-LOW → [[Relay-Outputs]]
+- تغذیه: آداپتور 12V/5A → مبدل Buck LM2596 → 5V → [[Power-System]]
+- درایور LED: مدار جریان ثابت با LM317T (۸۳۳ میلی‌آمپر) → [[LED-Driver]]
 - نسخه سند طراحی: ۲.۰ (تاریخ ۹ شهریور ۱۴۰۵)
 
 ## ۳) نرم‌افزار
 
 - فریم‌ورک: Arduino / PlatformIO
-- کتابخانه‌ها: Blynk ،DHT sensor library
+- نسخه فریم‌ورک: 1.1.0
+- کتابخانه‌ها: Blynk، DHT sensor library، ESPAsyncWebServer، AsyncTCP، ArduinoJson، WiFiManager
 - کنترل موبایل: اپلیکیشن Blynk
+- رابط وب محلی: سرور وب روی ESP32 با WebSocket → [[WebUIManager]]
+- معماری نرم‌افزار → [[Firmware-Architecture]]
+
+### ماژول‌های نرم‌افزار
+
+| ماژول | فایل | توضیح |
+|---|---|---|
+| SystemManager | `src/system/` | مدیر کل سیستم → [[SystemManager]] |
+| StateManager | `src/state/` | وضعیت لحظه‌ای → [[StateManager]] |
+| SensorManager | `src/sensors/` | خواندن سنسورها → [[SensorManager]] |
+| DeviceManager | `src/devices/` | کنترل تجهیزات → [[DeviceManager]] |
+| AutomationManager | `src/automation/` | تصمیم‌گیری خودکار → [[AutomationManager]] |
+| BlynkManager | `src/blynk/` | ارتباط Blynk → [[BlynkManager]] |
+| NetworkManager | `src/network/` | مدیریت WiFi → [[Firmware-Architecture]] |
+| WebUIManager | `src/webui/` | رابط وب → [[WebUIManager]] |
+| Config + Datastreams | `src/core/` | پیکربندی و Virtual Pin → [[Config-and-Datastreams]] |
+| Light/Fan/Fogger/Pump | `src/devices/` | کلاس‌های تجهیزات → [[Devices-Light-Fan-Fogger-Pump]] |
 
 ## ۴) وضعیت فعلی پروژه
 
 - فاز جاری: تکمیل طراحی سخت‌افزار (نسخه ۰.۹)
 - خرید قطعات: در حال انجام (تا ۸۰۳/۰۲/۰۴)
-- آخرین به‌روزرسانی این فایل: ۱۴۰۵/۰۶/۲۶
+- آخرین به‌روزرسانی این فایل: 2026-09-24
 
 ## ۵) دفتر تصمیم‌ها
 
 |تاریخ|تصمیم|دلیل|
 |---|---|---|
 |۱۴۰۵/۰۶/۰۹|پین‌ها نهایی شد|جلوگیری از تداخل ورودی/خروجی و بوت ESP32|
+|2026-09-24|سازمان‌دهی vault بر اساس ساختار فعلی کد|ایجاد یادداشت‌های سخت‌افزار، firmware، docs و problem|
 
-## ۶) قرارداد کار با دستیارها
+## ۶) موارد نیازمند تأیید
+
+- [[Water-Level-Sensor-Inconsistency]] — ناسازگاری ثابت‌های Config با پیاده‌سازی فعلی سنسور سطح آب
+
+## ۷) قرارداد کار با دستیارها
 
 - زبان پاسخ: فارسی
 - قبل از هر پاسخ، این فایل را مبنای دانش قرار بده
 - اگر چیزی در این فایل نبود، بپرس، حدس نزن
+
+## ۸) ساختار Vault
+
+| پوشه | محتوا |
+|---|---|
+| `00-MASTER/` | این فایل — سند مرکزی |
+| `01-Hardware/` | یادداشت‌های سخت‌افزاری → [[GPIO-Map]]، [[Relay-Outputs]]، [[DHT22-Sensor]]، [[Water-Level-Sensor]]، [[Power-System]]، [[LED-Driver]] |
+| `02-Firmware/` | یادداشت‌های نرم‌افزاری → [[Firmware-Architecture]] |
+| `03-Docs/` | فهرست اسناد رسمی → [[Docs-Index]] |
+| `04-Learnings/` | درس‌های آموخته شده |
+| `05-Logs/` | یادداشت‌های روزانه |
+| `06-Problems/` | مسائل باز → [[Water-Level-Sensor-Inconsistency]] |
+| `99-Archive/` | آرشیو |
