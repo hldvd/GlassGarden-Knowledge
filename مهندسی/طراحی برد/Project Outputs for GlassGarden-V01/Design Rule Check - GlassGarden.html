@@ -1,0 +1,532 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD26\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">06/09/2026</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">09:10:15 ب.ظ</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc" class="file"><acronym title="D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc">D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">64</td></tr>
+</table>
+</td>
+</table><a name="IDVCKIGOOOWAANEFFVHZR5BWINPH2NQZOPJNGPTQLWL3EQM35XW4MF"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDO1OX3QZB1MJMFXJACB5I0TBXZL52YPW0SSZ12OFD3GN1FX5XKKDH">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHVNT1IX0L0NAKDSAT3ZNPOGROEWAAXYANFBB3FLEB1IBJPQP5QJN">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDN23MZPWK3KLGE0SM1IKKMDO5PPPWFDITLWKY2MIDCCIGRH5F3VAK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">47</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDFND5GL5JMVTNF2VJISM54C0ZWKFG2J455XIBMZEJYM3VP3VJ3YBI">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDUEPULV2FXTZSO3YQCKTY5DIMDJ44LTYXZHLKP0LFVSL3NSBN5IRH">Width Constraint (Min=0.254mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDKFOMDO10IH2JGDIY1CJ0GKJW5CIVCPKO1DO33SFZD2WVDKHIBQWL">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3RZ5DHGUFTAKKW32Q4F2WJHEUGYB0F3W1AKRHXCFJOUO4SKSCKDL">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDUSBHZFJS5L3RPDHEPQOXIEG03KZM0VFN4ZEK2TJIDYYUCHJWYYRH">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDHHVFD4FDTIRXOMBANB5ZNMPO3K2OUUNKGYUYBME2BAYA4VCNO1TC">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID2FOKBJG5SMZVPQ1IOHUYUOLZSP11FPZXURNLZ4KO4AELIA1Y2EFB">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXCN1CVYE3AKEMMIR23EESD4NCGD2ZRCRG45KVLUDGBMN51LUGYF">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</a></td>
+<td class="column2">8</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDC4JO51AF51IZEQV1KH1WNFV1CVL30DS1X5YSEDFT3HFD3GXJFRG">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">9</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZP0S4QVMLYILB1X2W4M53QLXSM45HX2OTWIZ2AEF5PLXQYOMGC0J">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID41JL0PQPXYNPBXHNU05P5Q4UHDTOUCZGJINUS3H2XJ2SDIC1C2WJ">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">64</td>
+</tr>
+</table><br><a name="IDN23MZPWK3KLGE0SM1IKKMDO5PPPWFDITLWKY2MIDCCIGRH5F3VAK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Un-Routed Net Constraint ( (All) )</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1085.787mil|Location2.X=1429.213mil|Location1.Y=1430.787mil|Location2.Y=2044.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1085.787mil|Location2.X=1429.213mil|Location1.Y=1430.787mil|Location2.Y=2044.213mil|Absolute=True">Un-Routed Net Constraint: Net +12V Between Pad C1-1(28.829mm,37.592mm) on Multi-Layer And Pad F1-2(35.052mm,50.673mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=1184.213mil|Location1.Y=1430.787mil|Location2.Y=1610.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=1184.213mil|Location1.Y=1430.787mil|Location2.Y=1610.315mil|Absolute=True">Un-Routed Net Constraint: Net +12V Between Pad J7-3(5.334mm,40.052mm) on Multi-Layer And Pad C1-1(28.829mm,37.592mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1085.787mil|Location2.X=1740.118mil|Location1.Y=1524.016mil|Location2.Y=1726.063mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1085.787mil|Location2.X=1740.118mil|Location1.Y=1524.016mil|Location2.Y=1726.063mil|Absolute=True">Un-Routed Net Constraint: Net 12V_F Between Pad C1-2(28.829mm,42.592mm) on Multi-Layer And Pad D1-1(42.799mm,40.11mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=651.693mil|Location2.X=1184.213mil|Location1.Y=1627.638mil|Location2.Y=2443.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=651.693mil|Location2.X=1184.213mil|Location1.Y=1627.638mil|Location2.Y=2443.307mil|Absolute=True">Un-Routed Net Constraint: Net 12V_F Between Pad J1-2(17.653mm,60.96mm) on Multi-Layer And Pad C1-2(28.829mm,42.592mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3205.787mil|Location2.X=3304.213mil|Location1.Y=961.535mil|Location2.Y=1359.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3205.787mil|Location2.X=3304.213mil|Location1.Y=961.535mil|Location2.Y=1359.213mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad J9-2(82.296mm,25.273mm) on Multi-Layer And Pad C2-1(82.677mm,33.274mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2661.535mil|Location2.X=3304.213mil|Location1.Y=1260.787mil|Location2.Y=1483.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2661.535mil|Location2.X=3304.213mil|Location1.Y=1260.787mil|Location2.Y=1483.465mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad LED1-2(68.453mm,36.83mm) on Multi-Layer And Pad C2-1(82.677mm,33.274mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3205.787mil|Location2.X=3573.898mil|Location1.Y=1260.787mil|Location2.Y=2393.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3205.787mil|Location2.X=3573.898mil|Location1.Y=1260.787mil|Location2.Y=2393.898mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad C2-1(82.677mm,33.274mm) on Multi-Layer And Pad U1-4(89.027mm,59.055mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.638mil|Location2.X=3783.465mil|Location1.Y=1260.787mil|Location2.Y=1359.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.638mil|Location2.X=3783.465mil|Location1.Y=1260.787mil|Location2.Y=1359.213mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-2(87.677mm,33.274mm) on Multi-Layer And Pad J4-1(95.25mm,33.528mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3501.063mil|Location1.Y=961.535mil|Location2.Y=1359.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3501.063mil|Location1.Y=961.535mil|Location2.Y=1359.213mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J9-3(84.796mm,25.273mm) on Multi-Layer And Pad C2-2(87.677mm,33.274mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.11mil|Location2.X=3501.063mil|Location1.Y=1260.787mil|Location2.Y=1483.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2563.11mil|Location2.X=3501.063mil|Location1.Y=1260.787mil|Location2.Y=1483.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad LED1-1(65.953mm,36.83mm) on Multi-Layer And Pad C2-2(87.677mm,33.274mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.638mil|Location2.X=3573.898mil|Location1.Y=1260.787mil|Location2.Y=1688.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3402.638mil|Location2.X=3573.898mil|Location1.Y=1260.787mil|Location2.Y=1688.898mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad C2-2(87.677mm,33.274mm) on Multi-Layer And Pad U1-3(89.027mm,41.148mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.882mil|Location2.X=1953.898mil|Location1.Y=1524.016mil|Location2.Y=1688.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.882mil|Location2.X=1953.898mil|Location1.Y=1524.016mil|Location2.Y=1688.898mil|Absolute=True">Un-Routed Net Constraint: Net 12V_F Between Pad D1-1(42.799mm,40.11mm) on Multi-Layer And Pad U1-2(47.879mm,41.148mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.787mil|Location2.X=1740.118mil|Location1.Y=1945.787mil|Location2.Y=2375.984mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1330.787mil|Location2.X=1740.118mil|Location1.Y=1945.787mil|Location2.Y=2375.984mil|Absolute=True">Un-Routed Net Constraint: Net +12V Between Pad F1-2(35.052mm,50.673mm) on Multi-Layer And Pad D1-2(42.799mm,58.95mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.882mil|Location2.X=1958.898mil|Location1.Y=2256.102mil|Location2.Y=2393.898mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1629.882mil|Location2.X=1958.898mil|Location1.Y=2256.102mil|Location2.Y=2393.898mil|Absolute=True">Un-Routed Net Constraint: Net +12V Between Pad D1-2(42.799mm,58.95mm) on Multi-Layer And Pad U1-1(48.006mm,59.055mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=444.961mil|Location2.X=543.386mil|Location1.Y=1945.787mil|Location2.Y=2443.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=444.961mil|Location2.X=543.386mil|Location1.Y=1945.787mil|Location2.Y=2443.307mil|Absolute=True">Un-Routed Net Constraint: Net 12V_IN Between Pad F1-1(12.552mm,50.673mm) on Multi-Layer And Pad J1-1(12.653mm,60.96mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=264.527mil|Location1.Y=225.472mil|Location2.Y=1511.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=264.527mil|Location1.Y=225.472mil|Location2.Y=1511.89mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad J7-2(5.334mm,37.552mm) on Multi-Layer And Pad J10-1(5.969mm,6.477mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1644.527mil|Location1.Y=205.472mil|Location2.Y=384.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1644.527mil|Location1.Y=205.472mil|Location2.Y=384.527mil|Absolute=True">Un-Routed Net Constraint: Net FOGGER Between Pad J10-2(5.969mm,9.017mm) on Multi-Layer And Pad J12-13(41.021mm,5.969mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1744.527mil|Location1.Y=205.472mil|Location2.Y=484.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1744.527mil|Location1.Y=205.472mil|Location2.Y=484.527mil|Absolute=True">Un-Routed Net Constraint: Net FAN Between Pad J10-3(5.969mm,11.557mm) on Multi-Layer And Pad J12-12(43.561mm,5.969mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1944.527mil|Location1.Y=205.472mil|Location2.Y=584.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=1944.527mil|Location1.Y=205.472mil|Location2.Y=584.528mil|Absolute=True">Un-Routed Net Constraint: Net PUMP Between Pad J10-4(5.969mm,14.097mm) on Multi-Layer And Pad J12-10(48.641mm,5.969mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=2044.527mil|Location1.Y=205.472mil|Location2.Y=684.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=2044.527mil|Location1.Y=205.472mil|Location2.Y=684.528mil|Absolute=True">Un-Routed Net Constraint: Net LIGHT Between Pad J10-5(5.969mm,16.637mm) on Multi-Layer And Pad J12-9(51.181mm,5.969mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=2344.528mil|Location1.Y=205.472mil|Location2.Y=784.528mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=205.472mil|Location2.X=2344.528mil|Location1.Y=205.472mil|Location2.Y=784.528mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J10-6(5.969mm,19.177mm) on Multi-Layer And Pad J12-6(58.801mm,5.969mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1920.473mil|Location2.X=3175.039mil|Location1.Y=961.535mil|Location2.Y=1304.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1920.473mil|Location2.X=3175.039mil|Location1.Y=961.535mil|Location2.Y=1304.527mil|Absolute=True">Un-Routed Net Constraint: Net WATER_LVL Between Pad J11-11(49.53mm,32.385mm) on Multi-Layer And Pad J9-1(79.796mm,25.273mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.473mil|Location2.X=3003.465mil|Location1.Y=1211.535mil|Location2.Y=1304.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2020.473mil|Location2.X=3003.465mil|Location1.Y=1211.535mil|Location2.Y=1304.527mil|Absolute=True">Un-Routed Net Constraint: Net FAN_PWM Between Pad J11-12(52.07mm,32.385mm) on Multi-Layer And Pad J13-2(75.438mm,31.623mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.472mil|Location2.X=3003.465mil|Location1.Y=1113.11mil|Location2.Y=1304.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2120.472mil|Location2.X=3003.465mil|Location1.Y=1113.11mil|Location2.Y=1304.527mil|Absolute=True">Un-Routed Net Constraint: Net FAN_TACH Between Pad J11-13(54.61mm,32.385mm) on Multi-Layer And Pad J13-1(75.438mm,29.123mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1420.473mil|Location2.X=3165.039mil|Location1.Y=261.536mil|Location2.Y=1304.527mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1420.473mil|Location2.X=3165.039mil|Location1.Y=261.536mil|Location2.Y=1304.527mil|Absolute=True">Un-Routed Net Constraint: Net DHT_DATA Between Pad J11-6(36.83mm,32.385mm) on Multi-Layer And Pad J8-3(79.542mm,7.493mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2785.472mil|Location2.X=3263.465mil|Location1.Y=205.472mil|Location2.Y=328.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2785.472mil|Location2.X=3263.465mil|Location1.Y=205.472mil|Location2.Y=328.464mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad J12-1(71.501mm,5.969mm) on Multi-Layer And Pad J8-2(82.042mm,7.493mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2285.472mil|Location2.X=3361.89mil|Location1.Y=205.472mil|Location2.Y=328.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2285.472mil|Location2.X=3361.89mil|Location1.Y=205.472mil|Location2.Y=328.464mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J12-6(58.801mm,5.969mm) on Multi-Layer And Pad J8-1(84.542mm,7.493mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.693mil|Location2.X=3793.307mil|Location1.Y=1991.693mil|Location2.Y=2568.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3696.693mil|Location2.X=3793.307mil|Location1.Y=1991.693mil|Location2.Y=2568.307mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J2-1(94.996mm,64.135mm) on Multi-Layer And Pad J3-1(95.25mm,51.689mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3783.307mil|Location1.Y=2284.843mil|Location2.Y=2388.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3783.307mil|Location1.Y=2284.843mil|Location2.Y=2388.465mil|Absolute=True">Un-Routed Net Constraint: Net LIGHT_OUT Between Pad J6-1(30.099mm,59.817mm) on Multi-Layer And Pad J2-2(94.996mm,59.135mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3436.102mil|Location2.X=3793.307mil|Location1.Y=1551.102mil|Location2.Y=2078.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3436.102mil|Location2.X=3793.307mil|Location1.Y=1551.102mil|Location2.Y=2078.307mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad U1-3(89.027mm,41.148mm) on Multi-Layer And Pad J3-1(95.25mm,51.689mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3793.307mil|Location1.Y=1794.842mil|Location2.Y=2486.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3793.307mil|Location1.Y=1794.842mil|Location2.Y=2486.89mil|Absolute=True">Un-Routed Net Constraint: Net PUMP_OUT Between Pad J6-2(30.099mm,62.317mm) on Multi-Layer And Pad J3-2(95.25mm,46.689mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3783.465mil|Location1.Y=1384.961mil|Location2.Y=2585.315mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1151.535mil|Location2.X=3783.465mil|Location1.Y=1384.961mil|Location2.Y=2585.315mil|Absolute=True">Un-Routed Net Constraint: Net FAN_OUT Between Pad J6-3(30.099mm,64.817mm) on Multi-Layer And Pad J4-2(95.25mm,36.028mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.961mil|Location2.X=3798.307mil|Location1.Y=189.843mil|Location2.Y=328.464mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.961mil|Location2.X=3798.307mil|Location1.Y=189.843mil|Location2.Y=328.464mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J8-1(84.542mm,7.493mm) on Multi-Layer And Pad J5-1(95.377mm,5.922mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=3798.307mil|Location1.Y=386.693mil|Location2.Y=1413.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=3798.307mil|Location1.Y=386.693mil|Location2.Y=1413.465mil|Absolute=True">Un-Routed Net Constraint: Net FOGGER_OUT Between Pad J7-1(5.334mm,35.052mm) on Multi-Layer And Pad J5-2(95.377mm,10.922mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=2376.89mil|Location1.Y=1431.535mil|Location2.Y=1511.89mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=176.536mil|Location2.X=2376.89mil|Location1.Y=1431.535mil|Location2.Y=1511.89mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad J7-2(5.334mm,37.552mm) on Multi-Layer And Pad R3-2(59.523mm,37.211mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.961mil|Location2.X=3376.89mil|Location1.Y=261.536mil|Location2.Y=528.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3294.961mil|Location2.X=3376.89mil|Location1.Y=261.536mil|Location2.Y=528.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad J8-1(84.542mm,7.493mm) on Multi-Layer And Pad R2-2(84.923mm,12.573mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3196.535mil|Location2.X=3278.465mil|Location1.Y=261.536mil|Location2.Y=528.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3196.535mil|Location2.X=3278.465mil|Location1.Y=261.536mil|Location2.Y=528.465mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad J8-2(82.042mm,7.493mm) on Multi-Layer And Pad R2-1(82.423mm,12.573mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.535mil|Location2.X=3273.465mil|Location1.Y=751.535mil|Location2.Y=1028.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.535mil|Location2.X=3273.465mil|Location1.Y=751.535mil|Location2.Y=1028.465mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad R1-1(82.296mm,19.939mm) on Multi-Layer And Pad J9-2(82.296mm,25.273mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3371.89mil|Location1.Y=751.535mil|Location2.Y=1028.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3371.89mil|Location1.Y=751.535mil|Location2.Y=1028.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R1-2(84.796mm,19.939mm) on Multi-Layer And Pad J9-3(84.796mm,25.273mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2211.535mil|Location2.X=2630.039mil|Location1.Y=1416.535mil|Location2.Y=1498.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2211.535mil|Location2.X=2630.039mil|Location1.Y=1416.535mil|Location2.Y=1498.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R3-1(57.023mm,37.211mm) on Multi-Layer And Pad LED1-1(65.953mm,36.83mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2309.961mil|Location2.X=2728.465mil|Location1.Y=1416.535mil|Location2.Y=1498.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2309.961mil|Location2.X=2728.465mil|Location1.Y=1416.535mil|Location2.Y=1498.465mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad R3-2(59.523mm,37.211mm) on Multi-Layer And Pad LED1-2(68.453mm,36.83mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.535mil|Location2.X=3278.465mil|Location1.Y=461.536mil|Location2.Y=818.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3206.535mil|Location2.X=3278.465mil|Location1.Y=461.536mil|Location2.Y=818.465mil|Absolute=True">Un-Routed Net Constraint: Net +5V Between Pad R1-1(82.296mm,19.939mm) on Multi-Layer And Pad R2-1(82.423mm,12.573mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3376.89mil|Location1.Y=461.536mil|Location2.Y=818.465mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3304.961mil|Location2.X=3376.89mil|Location1.Y=461.536mil|Location2.Y=818.465mil|Absolute=True">Un-Routed Net Constraint: Net GND Between Pad R1-2(84.796mm,19.939mm) on Multi-Layer And Pad R2-2(84.923mm,12.573mm) on Multi-Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=25mil|Location1.Y=-5mil|Location2.Y=2760.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=25mil|Location1.Y=-5mil|Location2.Y=2760.905mil|Absolute=True">Un-Routed Net Constraint: Track (0.508mm,0mm)(0.508mm,70mm) on Top Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=3962.008mil|Location1.Y=-5mil|Location2.Y=5mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=3962.008mil|Location1.Y=-5mil|Location2.Y=5mil|Absolute=True">Un-Routed Net Constraint: Track (0.508mm,0mm)(100.508mm,0mm) on Top Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=3962.008mil|Location1.Y=2750.905mil|Location2.Y=2760.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=15mil|Location2.X=3962.008mil|Location1.Y=2750.905mil|Location2.Y=2760.905mil|Absolute=True">Un-Routed Net Constraint: Track (0.508mm,70mm)(100.508mm,70mm) on Top Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3952.008mil|Location2.X=3962.008mil|Location1.Y=-5mil|Location2.Y=2760.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3952.008mil|Location2.X=3962.008mil|Location1.Y=-5mil|Location2.Y=2760.905mil|Absolute=True">Un-Routed Net Constraint: Track (100.508mm,0mm)(100.508mm,70mm) on Top Layer Dead Copper - Net Not Assigned.</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDXCN1CVYE3AKEMMIR23EESD4NCGD2ZRCRG45KVLUDGBMN51LUGYF"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.254mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=2252.269mil|Location2.Y=2259.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=2252.269mil|Location2.Y=2259.936mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-1(48.006mm,59.055mm) on Multi-Layer And Track (46.67mm,39.825mm)(46.67mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=2371.167mil|Location2.Y=2378.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=2371.167mil|Location2.Y=2378.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-1(48.006mm,59.055mm) on Multi-Layer And Track (46.67mm,60.325mm)(90.17mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-2(47.879mm,41.148mm) on Multi-Layer And Track (46.67mm,39.825mm)(46.67mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1833.569mil|Location2.X=1841.235mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-2(47.879mm,41.148mm) on Multi-Layer And Track (46.67mm,39.825mm)(90.17mm,39.825mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.269mil|Location2.X=3439.936mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.269mil|Location2.X=3439.936mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-3(89.027mm,41.148mm) on Multi-Layer And Track (46.67mm,39.825mm)(90.17mm,39.825mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3546.167mil|Location2.X=3553.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3546.167mil|Location2.X=3553.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-3(89.027mm,41.148mm) on Multi-Layer And Track (90.17mm,39.825mm)(90.17mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.269mil|Location2.X=3439.936mil|Location1.Y=2371.167mil|Location2.Y=2378.833mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3432.269mil|Location2.X=3439.936mil|Location1.Y=2371.167mil|Location2.Y=2378.833mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-4(89.027mm,59.055mm) on Multi-Layer And Track (46.67mm,60.325mm)(90.17mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3546.167mil|Location2.X=3553.833mil|Location1.Y=2252.269mil|Location2.Y=2259.936mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3546.167mil|Location2.X=3553.833mil|Location1.Y=2252.269mil|Location2.Y=2259.936mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.254mm) Between Pad U1-4(89.027mm,59.055mm) on Multi-Layer And Track (90.17mm,39.825mm)(90.17mm,60.325mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDC4JO51AF51IZEQV1KH1WNFV1CVL30DS1X5YSEDFT3HFD3GXJFRG"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1022.128mil|Location2.X=1029.794mil|Location1.Y=1407.275mil|Location2.Y=1414.941mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1022.128mil|Location2.X=1029.794mil|Location1.Y=1407.275mil|Location2.Y=1414.941mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Arc (28.829mm,40.005mm) on Top Overlay And Text "J11" (23.012mm,34.519mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=947.372mil|Location2.X=958.622mil|Location1.Y=1795.375mil|Location2.Y=1806.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=947.372mil|Location2.X=958.622mil|Location1.Y=1795.375mil|Location2.Y=1806.625mil|Absolute=True">Silk To Silk Clearance Constraint: (0.051mm &lt; 0.254mm) Between Text "C1" (23.952mm,45.898mm) on Top Overlay And Track (9.758mm,45.593mm)(37.825mm,45.593mm) on Top Overlay Silk Text to Silk Clearance [0.051mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3222.365mil|Location2.X=3233.615mil|Location1.Y=1605.365mil|Location2.Y=1616.615mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3222.365mil|Location2.X=3233.615mil|Location1.Y=1605.365mil|Location2.Y=1616.615mil|Absolute=True">Silk To Silk Clearance Constraint: (0.204mm &lt; 0.254mm) Between Text "C2" (80.213mm,39.167mm) on Top Overlay And Text "Out-" (81.229mm,41.148mm) on Top Overlay Silk Text to Silk Clearance [0.204mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3154.167mil|Location2.X=3161.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3154.167mil|Location2.X=3161.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "C2" (80.213mm,39.167mm) on Top Overlay And Track (46.67mm,39.825mm)(90.17mm,39.825mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.859mil|Location2.X=3192.109mil|Location1.Y=434.485mil|Location2.Y=448.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.859mil|Location2.X=3192.109mil|Location1.Y=434.485mil|Location2.Y=448.117mil|Absolute=True">Silk To Silk Clearance Constraint: (0.197mm &lt; 0.254mm) Between Text "J8" (78.181mm,9.906mm) on Top Overlay And Track (81.153mm,11.303mm)(81.153mm,13.843mm) on Top Overlay Silk Text to Silk Clearance [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.859mil|Location2.X=3192.109mil|Location1.Y=434.485mil|Location2.Y=448.117mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3180.859mil|Location2.X=3192.109mil|Location1.Y=434.485mil|Location2.Y=448.117mil|Absolute=True">Silk To Silk Clearance Constraint: (0.197mm &lt; 0.254mm) Between Text "J8" (78.181mm,9.906mm) on Top Overlay And Track (81.153mm,11.303mm)(86.228mm,11.303mm) on Top Overlay Silk Text to Silk Clearance [0.197mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2548.167mil|Location2.X=2555.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2548.167mil|Location2.X=2555.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "LED1" (64.821mm,38.989mm) on Top Overlay And Track (46.67mm,39.825mm)(90.17mm,39.825mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3191.167mil|Location2.X=3198.833mil|Location1.Y=926.147mil|Location2.Y=933.814mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3191.167mil|Location2.X=3198.833mil|Location1.Y=926.147mil|Location2.Y=933.814mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R1" (81.153mm,22.098mm) on Top Overlay And Track (78.272mm,23.749mm)(86.273mm,23.749mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=D:\%D9%85%D8%AD%D8%B3%D9%86\%D9%86%D9%82%D8%B4%D9%87 %D8%A8%D8%B1%D8%AF\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.167mil|Location2.X=2203.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2196.167mil|Location2.X=2203.833mil|Location1.Y=1564.081mil|Location2.Y=1571.747mil|Absolute=True">Silk To Silk Clearance Constraint: (Collision &lt; 0.254mm) Between Text "R3" (55.88mm,39.37mm) on Top Overlay And Track (46.67mm,39.825mm)(90.17mm,39.825mm) on Top Overlay Silk Text to Silk Clearance [0mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

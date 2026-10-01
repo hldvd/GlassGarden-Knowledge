@@ -1,0 +1,3 @@
+Layer Pairs Export File for PCB: D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden-k.PcbDoc
+LayersSetName=Top_Bot_Plated_Thru_Holes|DrillFile=glassgarden-k-plated.txt|DrillLayers=gtl,gbl
+LayersSetName=Top_Bot_NonPlated_Thru_Holes|DrillFile=glassgarden-k-nonplated.txt|DrillLayers=gtl,gbl

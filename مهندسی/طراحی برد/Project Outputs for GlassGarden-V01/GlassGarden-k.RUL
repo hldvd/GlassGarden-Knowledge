@@ -1,0 +1,23 @@
+DRC Rules Export File for PCB: D:\محسن\نقشه برد\GlassGarden-V01\GlassGarden-k.PcbDoc
+RuleKind=Width|RuleName=MaxMinWidth_18|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_17|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_16|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_15|Scope=Board|Minimum=39.37
+RuleKind=Width|RuleName=MaxMinWidth_14|Scope=Board|Minimum=39.37
+RuleKind=Width|RuleName=MaxMinWidth_13|Scope=Board|Minimum=47.24
+RuleKind=Width|RuleName=MaxMinWidth_12|Scope=Board|Minimum=31.50
+RuleKind=Width|RuleName=MaxMinWidth_11|Scope=Board|Minimum=39.37
+RuleKind=Width|RuleName=MaxMinWidth_10|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_9|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_8|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_7|Scope=Board|Minimum=39.37
+RuleKind=Width|RuleName=MaxMinWidth_5|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_4|Scope=Board|Minimum=9.84
+RuleKind=Width|RuleName=MaxMinWidth_3|Scope=Board|Minimum=78.74
+RuleKind=Width|RuleName=MaxMinWidth_2|Scope=Board|Minimum=59.06
+RuleKind=Width|RuleName=MaxMinWidth_1|Scope=Board|Minimum=59.06
+RuleKind=Width|RuleName=MaxMinWidth_6|Scope=Board|Minimum=10.00
+RuleKind=SolderMaskExpansion|RuleName=SolderMaskExpansion|Scope=Board|Minimum=0.00
+RuleKind=Width|RuleName=Width|Scope=Board|Minimum=9.84
+RuleKind=ShortCircuit|RuleName=ShortCircuit|Scope=Board|Allowed=0
+RuleKind=Clearance|RuleName=Clearance|Scope=Board|Minimum=10.00

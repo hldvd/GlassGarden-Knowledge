@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [GlassGarden-V01.PrjPcb]
+   Generated File[GlassGarden-k-Plated.TXT]
+   Generated File[GlassGarden-k-NonPlated.TXT]
+   Generated File[GlassGarden-k.LDP]
+   Generated File[GlassGarden-k.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 06:10:45 ق.ظ On 17/06/1405
