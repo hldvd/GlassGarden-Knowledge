@@ -14,6 +14,7 @@ tags: [docs, index]
 |---|---|---|
 | `GlassGarden Project Master.pdf` | PDF | سند مرجع و مدیریت پروژه |
 | `GlassGarden_Project_Summary.pdf` | PDF | خلاصه‌ی کلی پروژه |
+| `مبانی و چشم‌انداز.md` | Markdown | مبانی فکری، چرایی، چشم‌انداز و چارچوب اهداف G&G^SMART (سند مرجع) |
 
 **مسیر:** `Docs/01-مدیریتی/`
 
